@@ -9,5 +9,7 @@ libraryDependencies += Dependencies.scalaTest
 libraryDependencies ++= Dependencies.cats
 libraryDependencies ++= Dependencies.zio
 libraryDependencies ++= Dependencies.zioConfig
+libraryDependencies ++= Dependencies.fs2
+libraryDependencies ++= Dependencies.http4s
 
 scalacOptions += "-Ymacro-annotations"

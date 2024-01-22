@@ -28,4 +28,18 @@ object Dependencies {
     "dev.zio" %% "zio-config-magnolia" % "1.0.5",
     "dev.zio" %% "zio-config-typesafe" % "1.0.5"
   )
+
+  lazy val fs2: Seq[ModuleID] = Seq(
+    "co.fs2" %% "fs2-core" % "3.6.1",
+    "co.fs2" %% "fs2-io"   % "3.6.1"
+  )
+
+  lazy val http4s: Seq[ModuleID] = Seq(
+    "org.http4s" %% "http4s-client" % "0.23.18",
+    "org.http4s" %% "http4s-dsl" % "0.23.18",
+    "org.http4s" %% "http4s-ember-server" % "0.23.18",
+    "org.http4s" %% "http4s-ember-client" % "0.23.18",
+
+  )
+
 }
