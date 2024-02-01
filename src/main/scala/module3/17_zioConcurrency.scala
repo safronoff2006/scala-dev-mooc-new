@@ -33,7 +33,7 @@ object zioConcurrency {
       start <- currentTime
       r <- zio
       end <- currentTime
-      _ <- putStrLn(s"Running time ${end - start}")
+      _ <- putStrLn(s"Running time ${end - start}").orDie
     } yield r
 
 
@@ -67,14 +67,14 @@ object zioConcurrency {
   /**
    * Написать эффект который получит курсы из обеих локаций
    */
-  lazy val getFrom2Locations: URIO[Console with Clock, (Unit, Unit)] = getExchangeRatesLocation1 zip getExchangeRatesLocation2
+  lazy val getFrom2Locations: URIO[Console with Clock, (Unit, Unit)] = (getExchangeRatesLocation1 zip getExchangeRatesLocation2).orDie
 
   /**
    * Написать эффект который получит курсы из обеих локаций параллельно
    */
   lazy val getFrom2Locations2: URIO[Console with Clock, (Unit, Unit)] = for{
-    f1 <- getExchangeRatesLocation1.fork
-    f2 <- getExchangeRatesLocation2.fork
+    f1 <- getExchangeRatesLocation1.orDie.fork
+    f2 <- getExchangeRatesLocation2.orDie.fork
     r1 <- f1.join
     r2 <- f2.join
   } yield (r1, r2)
