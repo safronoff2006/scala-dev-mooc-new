@@ -4,7 +4,7 @@ import sbt._
 object Dependencies {
   lazy val KindProjectorVersion = "0.10.3"
   lazy val ZioVersion = "1.0.4"
-
+  lazy val CirceVersion = "0.14.1"
 
   lazy val kindProjector =
     "org.typelevel" %% "kind-projector" % KindProjectorVersion
@@ -39,7 +39,14 @@ object Dependencies {
     "org.http4s" %% "http4s-dsl" % "0.23.18",
     "org.http4s" %% "http4s-ember-server" % "0.23.18",
     "org.http4s" %% "http4s-ember-client" % "0.23.18",
+  )
 
+  lazy val circe = Seq(
+    "io.circe" %% "circe-core" % CirceVersion,
+    "io.circe" %% "circe-generic" % CirceVersion,
+    "io.circe" %% "circe-parser" % CirceVersion,
+    "io.circe" %% "circe-derivation" % "0.13.0-M4",
+    "org.http4s" %% "http4s-circe" % "0.23.14"
   )
 
 }
