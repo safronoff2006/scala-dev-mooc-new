@@ -65,11 +65,10 @@ object UserService{
 
         } yield dto
 
-//RIO[db.DataSource, List[UserDTO]]
-      def listUsersWithRole(roleCode: RoleCode): RIO[db.DataSource, List[UserDTO]] = {
-       val zio: ZIO[Has[DataSource], Serializable, List[UserDTO]] = for {
 
-          role <- userRepo.findRoleByCode(roleCode).some
+      def listUsersWithRole(roleCode: RoleCode): RIO[db.DataSource, List[UserDTO]] =  for {
+
+          role <- userRepo.findRoleByCode(roleCode).some.orElseFail(new Throwable("Role not found"))
 
           list <- userRepo.listUsersWithRole(roleCode).map {
             users =>
@@ -80,12 +79,7 @@ object UserService{
 
         } yield list
 
-       zio.orElseFail(new Throwable("Role not found"))
-      }
 
-
-        
-        
     }
 
     val live: URLayer[UserRepository, UserService] = ZLayer.fromService[UserRepository.Service, UserService.Service](uRepo =>
