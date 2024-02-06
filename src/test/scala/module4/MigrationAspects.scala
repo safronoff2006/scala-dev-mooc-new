@@ -17,9 +17,13 @@ import module4.phoneBook.db.DataSource
 import zio.{ULayer, ZLayer}
 import zio.URIO
 
+
 object MigrationAspects {
-  
+
+
+
   def migrate() = {
+
     before(LiquibaseService.performMigration.orDie)
   }
 
@@ -40,6 +44,7 @@ object LiquibaseService {
     class Impl extends Service {
 
       override def performMigration: RIO[Liqui, Unit] = liquibase.map(_.update("dev"))
+
     }
 
 

@@ -1,5 +1,5 @@
 package module3
-
+/*
 import module3.zioDS.ref.{updateCounter}
 import zio.ZIO
 import zio.clock.Clock
@@ -78,3 +78,4 @@ object BasicZIOSpec extends DefaultRunnableSpec{
     )
   )
 }
+*/

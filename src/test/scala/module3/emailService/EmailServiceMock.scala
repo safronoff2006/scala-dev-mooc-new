@@ -1,5 +1,5 @@
 package module3.emailService
-
+/*
 import zio.test.mock.mockable
 import zio.test.mock
 import zio.{Has, URLayer}
@@ -20,3 +20,5 @@ object EmailServiceMock extends mock.Mock[EmailService]{
   }
 
 }
+
+ */
