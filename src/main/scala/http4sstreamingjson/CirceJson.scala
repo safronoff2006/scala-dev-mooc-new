@@ -1,5 +1,5 @@
 package http4sstreamingjson
-
+/*
 import cats.effect.{IO, IOApp}
 import io.circe.Decoder
 import io.circe.derivation.{deriveCodec, deriveDecoder}
@@ -96,3 +96,4 @@ object MainCircePars extends IOApp.Simple {
     )
   } yield()
 }
+*/

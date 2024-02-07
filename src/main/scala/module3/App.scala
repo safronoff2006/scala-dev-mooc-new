@@ -1,5 +1,5 @@
 package module3
-
+/*
 import sbt.testing.Task
 import zio.{ExitCode, IO, UIO, URIO, ZIO}
 
@@ -19,3 +19,4 @@ object AppZIO extends zio.App{
   override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] =
     ZIO.effect(println("Hello from zio")).exitCode
 }
+*/

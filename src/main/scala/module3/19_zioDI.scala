@@ -1,5 +1,5 @@
 package module3
-
+/*
 import zio.duration.Duration
 import zio.{Has, IO, RIO, Task, UIO, URIO, ZIO}
 import zio.duration.durationInt
@@ -122,3 +122,5 @@ object di {
   lazy val e5: IO[Throwable, Unit] = e4.provide(userService)
 
 }
+
+ */
