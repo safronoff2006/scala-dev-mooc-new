@@ -1,7 +1,11 @@
 package catsconcurrency.cats_effect_homework
 
-import cats.effect.{IO, IOApp}
+import cats.effect.{IO, IOApp, Spawn}
 import cats.implicits._
+
+
+import scala.concurrent.duration._
+import scala.language.postfixOps
 
 // Поиграемся с кошельками на файлах и файберами.
 
@@ -24,7 +28,29 @@ object WalletFibersApp extends IOApp.Simple {
       wallet1 <- Wallet.fileWallet[IO]("1")
       wallet2 <- Wallet.fileWallet[IO]("2")
       wallet3 <- Wallet.fileWallet[IO]("3")
+      fiber1 <- Spawn[IO].start(topupWithSleep(wallet1, 100).iterateWhile(_ => true))
+      fiber2 <- Spawn[IO].start(topupWithSleep(wallet2, 500).iterateWhile(_ => true))
+      fiber3 <- Spawn[IO].start(topupWithSleep(wallet3, 2000).iterateWhile(_ => true))
+      fiberPrinter <- Spawn[IO].start(balancesPrint(wallet1, wallet2, wallet3))
+      _ <- IO.readLine
+      _ <- fiber1.cancel *> fiber2.cancel *> fiber3.cancel *> fiberPrinter.cancel
       // todo: запустить все файберы и ждать ввода от пользователя чтобы завершить работу
     } yield ()
 
+  def topupWithSleep(w: Wallet[IO], duration: Int): IO[Unit] = for {
+    _ <- w.topup(100)
+    _ <- IO.sleep(duration milliseconds)
+  } yield ()
+
+  def balancesPrint(w1: Wallet[IO], w2: Wallet[IO], w3: Wallet[IO]): IO[Unit] = {
+      val  effectPrint: IO[Unit] = for {
+          b1 <- w1.balance
+          b2 <- w2.balance
+          b3 <- w3.balance
+          _ <- IO.println(s"Balanses - Wallet 1: ${b1.toString()}   Wallet 2: ${b2.toString()}   Wallet 3: ${b3.toString()}")
+          _ <- IO.sleep(5 seconds)
+        } yield ()
+
+      effectPrint.iterateWhile(_ => true)
+  }
 }

@@ -10,7 +10,8 @@ object WalletMain extends IOApp.Simple {
       wallet <- Wallet.fileWallet[IO]("test_wallet")
       _ <- wallet.topup(100.0)
       _ <- wallet.balance.flatMap(IO.println)
-      _ <- wallet.withdraw(50.0)
+      either <- wallet.withdraw(50.0) //добавлена печать результа withdraw
+      _ <- IO.println(either) //
       _ <- wallet.balance.flatMap(IO.println)
     } yield ()
 

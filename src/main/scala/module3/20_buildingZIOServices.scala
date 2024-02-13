@@ -1,5 +1,5 @@
 package module3
-
+/*
 import module3.emailService.EmailService
 import module3.userDAO.UserDAO
 import module3.userService.{UserID, UserService}
@@ -19,3 +19,5 @@ object buildingZIOServices{
     zio.Runtime.default.unsafeRun(app.provideSomeLayer[Console](env))
   }
 }
+
+ */
